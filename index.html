@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kalpesh Chavda — Mobile Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0A0F1E;
+    --navy-card: #111827;
+    --navy-border: #1E2A3A;
+    --cyan: #00D4FF;
+    --cyan-dim: rgba(0, 212, 255, 0.12);
+    --cyan-glow: rgba(0, 212, 255, 0.25);
+    --text-primary: #F0F4FF;
+    --text-secondary: #8A9BB5;
+    --text-muted: #4A5A72;
+    --green: #00E5A0;
+    --amber: #FFB547;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 5vw;
+    height: 64px;
+    background: rgba(10, 15, 30, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--navy-border);
+  }
+  .nav-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700; font-size: 18px;
+    color: var(--text-primary); text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--cyan); }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    font-size: 13px; font-weight: 500; color: var(--text-secondary);
+    text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--cyan); }
+
+  /* SECTIONS */
+  section { padding: 100px 5vw; max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--cyan);
+    margin-bottom: 14px; display: block;
+  }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding-top: 64px;
+    max-width: 1100px; margin: 0 auto;
+    gap: 3rem;
+  }
+  .hero-left { flex: 1; }
+  .hero-eyebrow {
+    font-size: 13px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--cyan);
+    margin-bottom: 18px; display: flex; align-items: center; gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block;
+    width: 28px; height: 1.5px; background: var(--cyan);
+  }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(40px, 6vw, 68px);
+    font-weight: 700; line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+  }
+  h1 .accent { color: var(--cyan); }
+  .hero-sub {
+    font-size: clamp(16px, 2vw, 19px);
+    color: var(--text-secondary); line-height: 1.6;
+    max-width: 500px; margin-bottom: 36px;
+  }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 26px; border-radius: 8px;
+    background: var(--cyan); color: #0A0F1E;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600; font-size: 14px;
+    text-decoration: none; transition: opacity 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 26px; border-radius: 8px;
+    border: 1px solid var(--navy-border);
+    color: var(--text-primary); background: transparent;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500; font-size: 14px;
+    text-decoration: none; transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--cyan); background: var(--cyan-dim); }
+
+  /* PHONE MOCKUP */
+  .hero-right {
+    flex-shrink: 0; width: 220px;
+    display: flex; justify-content: center; align-items: center;
+  }
+  .phone-frame {
+    width: 200px; height: 390px;
+    border: 2px solid var(--navy-border);
+    border-radius: 36px;
+    background: var(--navy-card);
+    position: relative;
+    box-shadow: 0 0 0 6px rgba(0,212,255,0.06), 0 32px 60px rgba(0,0,0,0.5);
+    animation: floatPhone 4s ease-in-out infinite;
+    overflow: hidden;
+  }
+  @keyframes floatPhone {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+  .phone-notch {
+    width: 80px; height: 22px;
+    background: var(--navy);
+    border-radius: 0 0 14px 14px;
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    z-index: 2;
+  }
+  .phone-screen {
+    position: absolute; inset: 0;
+    padding: 36px 14px 14px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .phone-bar {
+    height: 8px; border-radius: 4px;
+    background: var(--cyan-dim);
+    position: relative; overflow: hidden;
+  }
+  .phone-bar::after {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    border-radius: 4px;
+    background: var(--cyan);
+    animation: scanBar 3s ease-in-out infinite;
+  }
+  @keyframes scanBar {
+    0% { width: 0%; opacity: 1; }
+    70% { width: 75%; opacity: 1; }
+    100% { width: 75%; opacity: 0; }
+  }
+  .phone-bar:nth-child(2)::after { animation-delay: 0.4s; }
+  .phone-bar:nth-child(3)::after { animation-delay: 0.8s; width: 45%; }
+  .phone-bar:nth-child(3) { width: 60%; }
+  .phone-card {
+    margin-top: 8px; padding: 10px;
+    background: rgba(0,212,255,0.07);
+    border: 0.5px solid rgba(0,212,255,0.2);
+    border-radius: 10px;
+  }
+  .phone-card-dot { width: 24px; height: 24px; border-radius: 6px; background: var(--cyan); margin-bottom: 6px; }
+  .phone-card-line { height: 6px; border-radius: 3px; background: var(--cyan-dim); margin-bottom: 4px; }
+  .phone-card-line:last-child { width: 60%; }
+  .phone-glow {
+    position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%);
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,212,255,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* STATS */
+  .stats-row {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1px; border: 0.5px solid var(--navy-border); border-radius: 12px; overflow: hidden;
+    margin-top: 60px;
+  }
+  .stat {
+    padding: 28px 24px; background: var(--navy-card);
+  }
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 32px; font-weight: 700;
+    color: var(--cyan); letter-spacing: -0.03em; line-height: 1;
+  }
+  .stat-label { font-size: 13px; color: var(--text-secondary); margin-top: 5px; }
+
+  /* SKILLS */
+  #skills { padding-top: 0; }
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 700; letter-spacing: -0.02em;
+    color: var(--text-primary); margin-bottom: 40px;
+  }
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px;
+  }
+  .skill-group {
+    background: var(--navy-card);
+    border: 0.5px solid var(--navy-border);
+    border-radius: 12px; padding: 20px 22px;
+    transition: border-color 0.2s;
+  }
+  .skill-group:hover { border-color: rgba(0,212,255,0.35); }
+  .skill-group-title {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 20px;
+    background: var(--cyan-dim); color: var(--cyan);
+    border: 0.5px solid rgba(0,212,255,0.2);
+    white-space: nowrap;
+  }
+  .tag.green { background: rgba(0,229,160,0.1); color: var(--green); border-color: rgba(0,229,160,0.2); }
+  .tag.amber { background: rgba(255,181,71,0.1); color: var(--amber); border-color: rgba(255,181,71,0.2); }
+  .tag.neutral { background: rgba(138,155,181,0.1); color: var(--text-secondary); border-color: rgba(138,155,181,0.2); }
+
+  /* EXPERIENCE */
+  .timeline { display: flex; flex-direction: column; gap: 0; position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 11px; top: 8px; bottom: 8px; width: 1px;
+    background: var(--navy-border);
+  }
+  .timeline-item { padding-left: 40px; position: relative; padding-bottom: 44px; }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-dot {
+    position: absolute; left: 0; top: 6px;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--navy-card);
+    border: 2px solid var(--cyan);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .timeline-dot::after {
+    content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--cyan);
+  }
+  .exp-header { margin-bottom: 6px; }
+  .exp-company {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px; font-weight: 600; color: var(--text-primary);
+  }
+  .exp-meta { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+  .exp-meta span { color: var(--text-secondary); }
+  .exp-bullets { margin-top: 14px; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .exp-bullets li {
+    font-size: 14px; color: var(--text-secondary); line-height: 1.6;
+    padding-left: 16px; position: relative;
+  }
+  .exp-bullets li::before {
+    content: '→'; position: absolute; left: 0;
+    color: var(--cyan); font-size: 12px; top: 2px;
+  }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+  .project-card {
+    background: var(--navy-card);
+    border: 0.5px solid var(--navy-border);
+    border-radius: 14px; padding: 24px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .project-card:hover { border-color: rgba(0,212,255,0.35); transform: translateY(-3px); }
+  .project-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+  .project-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--cyan-dim); border: 0.5px solid rgba(0,212,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .project-platform {
+    font-size: 11px; color: var(--text-muted); text-align: right;
+    font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .project-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px;
+  }
+  .project-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 14px; }
+  .project-tech { display: flex; flex-wrap: wrap; gap: 5px; }
+  .project-tech .tag { font-size: 11px; padding: 3px 8px; }
+
+  /* CONTACT */
+  #contact { padding-bottom: 120px; }
+  .contact-box {
+    background: var(--navy-card);
+    border: 0.5px solid var(--navy-border);
+    border-radius: 20px; padding: 56px 48px;
+    text-align: center; max-width: 640px; margin: 0 auto;
+    position: relative; overflow: hidden;
+  }
+  .contact-box::before {
+    content: ''; position: absolute;
+    top: -60px; left: 50%; transform: translateX(-50%);
+    width: 240px; height: 240px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,212,255,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .contact-box h2 { margin-bottom: 12px; font-size: 32px; }
+  .contact-box p { color: var(--text-secondary); margin-bottom: 30px; }
+  .contact-details { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-bottom: 32px; }
+  .contact-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 14px; color: var(--text-secondary); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-item:hover { color: var(--cyan); }
+  .contact-item-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: var(--cyan-dim); display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 24px 5vw;
+    font-size: 12px; color: var(--text-muted);
+    border-top: 0.5px solid var(--navy-border);
+  }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 700px) {
+    #hero { flex-direction: column-reverse; padding-top: 100px; gap: 2rem; }
+    .hero-right { width: 100%; }
+    .phone-frame { width: 160px; height: 310px; }
+    .nav-links { display: none; }
+    section { padding: 72px 5vw; }
+    .contact-box { padding: 36px 24px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .phone-frame, .phone-bar::after { animation: none; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">KC<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero" style="padding: 0 5vw;">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Mobile Engineer</div>
+    <h1>Kalpesh<br><span class="accent">Chavda.</span></h1>
+    <p class="hero-sub">4 years building high-performance Flutter &amp; Android apps — from clean architecture and CI/CD pipelines to real-time video calling and large-scale marketplace platforms.</p>
+    <div class="hero-ctas">
+      <a href="mailto:kalpeshchavda.work@gmail.com" class="btn-primary">Get in touch →</a>
+      <a href="#projects" class="btn-outline">View projects</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="phone-frame">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="phone-bar"></div>
+        <div class="phone-bar"></div>
+        <div class="phone-bar"></div>
+        <div class="phone-card">
+          <div class="phone-card-dot"></div>
+          <div class="phone-card-line"></div>
+          <div class="phone-card-line"></div>
+        </div>
+        <div class="phone-card" style="margin-top: 4px; background: rgba(0,229,160,0.07); border-color: rgba(0,229,160,0.2);">
+          <div class="phone-card-dot" style="background: var(--green); width: 18px; height: 18px; border-radius: 4px;"></div>
+          <div class="phone-card-line" style="background: rgba(0,229,160,0.2);"></div>
+        </div>
+      </div>
+      <div class="phone-glow"></div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<section style="padding-top: 0; padding-bottom: 100px;">
+  <div class="stats-row reveal">
+    <div class="stat"><div class="stat-num">4+</div><div class="stat-label">Years of experience</div></div>
+    <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Production apps shipped</div></div>
+    <div class="stat"><div class="stat-num">2</div><div class="stat-label">Platforms: iOS &amp; Android</div></div>
+    <div class="stat"><div class="stat-num">0→1</div><div class="stat-label">Feature owner, Digihappy</div></div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <span class="section-label">Technical skills</span>
+  <h2 class="reveal">What I work with</h2>
+  <div class="skills-grid reveal">
+    <div class="skill-group">
+      <div class="skill-group-title">Languages</div>
+      <div class="skill-tags">
+        <span class="tag">Dart</span>
+        <span class="tag">Kotlin</span>
+        <span class="tag">Java</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Frameworks &amp; SDKs</div>
+      <div class="skill-tags">
+        <span class="tag">Flutter</span>
+        <span class="tag">Firebase</span>
+        <span class="tag">LiveKit</span>
+        <span class="tag">PushKit</span>
+        <span class="tag">CallKit</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Architecture</div>
+      <div class="skill-tags">
+        <span class="tag green">Clean Architecture</span>
+        <span class="tag green">MVVM</span>
+        <span class="tag green">Modular Design</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">State management</div>
+      <div class="skill-tags">
+        <span class="tag">Riverpod</span>
+        <span class="tag">Bloc</span>
+        <span class="tag">Provider</span>
+        <span class="tag">GetX</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">CI/CD &amp; DevOps</div>
+      <div class="skill-tags">
+        <span class="tag amber">CircleCI</span>
+        <span class="tag amber">Fastlane</span>
+        <span class="tag amber">GitHub Actions</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Testing</div>
+      <div class="skill-tags">
+        <span class="tag green">Unit Testing</span>
+        <span class="tag green">Widget Testing</span>
+        <span class="tag green">Integration Testing</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Monitoring</div>
+      <div class="skill-tags">
+        <span class="tag">Sentry</span>
+        <span class="tag">Firebase Crashlytics</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Tools &amp; services</div>
+      <div class="skill-tags">
+        <span class="tag neutral">Android Studio</span>
+        <span class="tag neutral">Xcode</span>
+        <span class="tag neutral">VS Code</span>
+        <span class="tag neutral">GitHub</span>
+        <span class="tag neutral">Jira</span>
+        <span class="tag neutral">REST APIs</span>
+        <span class="tag neutral">Deep Linking</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <span class="section-label">Experience</span>
+  <h2 class="reveal">Where I've worked</h2>
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="exp-header">
+        <div class="exp-company">Creole Studios Pvt. Ltd.</div>
+        <div class="exp-meta"><span>Software Engineer</span> &nbsp;·&nbsp; Ahmedabad &nbsp;·&nbsp; Jun 2023 – Dec 2025</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Designed and maintained scalable Flutter and native Android apps using Clean Architecture and MVVM.</li>
+        <li>Improved app performance by optimizing UI rendering, memory usage, lazy loading, and API interactions.</li>
+        <li>Refactored legacy codebases into modular, testable components — improved maintainability and scalability.</li>
+        <li>Built and managed CI/CD pipelines with CircleCI for automated build, test, and release workflows.</li>
+        <li>Automated Play Store and App Store deployments using Fastlane, cutting manual release turnaround time.</li>
+        <li>Monitored and resolved production issues using Sentry.</li>
+      </ul>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-dot" style="border-color: var(--green);"></div>
+      <div class="exp-header">
+        <div class="exp-company">Hexotix Pvt. Ltd.</div>
+        <div class="exp-meta"><span>Flutter Developer</span> &nbsp;·&nbsp; Surat &nbsp;·&nbsp; Jan 2022 – May 2023</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Designed and developed Flutter apps with responsive UI, high performance, and on-time delivery.</li>
+        <li>Integrated RESTful APIs, CRUD operations, and managed data with SQLite, Firebase, and Shared Preferences.</li>
+        <li>Implemented Google Mobile Ads/AdMob for monetization; followed clean, modular architecture with Git.</li>
+        <li>Collaborated with design, backend, and QA teams to build and optimize app features end-to-end.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <span class="section-label">Projects</span>
+  <h2 class="reveal">Things I've built</h2>
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <div class="project-card-top">
+        <div class="project-icon">📹</div>
+        <div class="project-platform">Flutter · iOS &amp; Android</div>
+      </div>
+      <div class="project-name">Digihappy</div>
+      <div class="project-desc">Cross-platform video calling app for senior users, focused on accessibility, stability, and performance. Built real-time communication with LiveKit SDK and VoIP features including one-tap calling, auto-answer, and deep linking.</div>
+      <div class="project-tech">
+        <span class="tag">Flutter</span>
+        <span class="tag">LiveKit</span>
+        <span class="tag">Riverpod</span>
+        <span class="tag">CallKit</span>
+        <span class="tag">CircleCI</span>
+        <span class="tag">Sentry</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-card-top">
+        <div class="project-icon">🛍️</div>
+        <div class="project-platform">Android · Java &amp; Kotlin</div>
+      </div>
+      <div class="project-name">Varage Sale</div>
+      <div class="project-desc">Large-scale community marketplace Android app. Resolved critical production issues, enhanced real-time chat, location-based listings, and notification reliability using Firebase services.</div>
+      <div class="project-tech">
+        <span class="tag">Kotlin</span>
+        <span class="tag">Java</span>
+        <span class="tag">Firebase</span>
+        <span class="tag amber">Multi-build variants</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-card-top">
+        <div class="project-icon">🏷️</div>
+        <div class="project-platform">Android + Flutter internal tool</div>
+      </div>
+      <div class="project-name">RedFlagDeals</div>
+      <div class="project-desc">Maintained two high-traffic Android apps (main and forums) sharing common modules. Improved notification delivery, optimized offline data access, and built a Flutter-based internal deal posting tool.</div>
+      <div class="project-tech">
+        <span class="tag">Android</span>
+        <span class="tag">Flutter</span>
+        <span class="tag green">Modular arch</span>
+        <span class="tag neutral">Local DB</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-card-top">
+        <div class="project-icon">🛡️</div>
+        <div class="project-platform">Flutter · Cross-platform</div>
+      </div>
+      <div class="project-name">GOD — Guards on Demand</div>
+      <div class="project-desc">Security guard management platform connecting administrators and licensed guards. Built job posting, shift management, and work history tracking with real-time updates and automated workflows.</div>
+      <div class="project-tech">
+        <span class="tag">Flutter</span>
+        <span class="tag">REST APIs</span>
+        <span class="tag green">Real-time updates</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-card-top">
+        <div class="project-icon">🍽️</div>
+        <div class="project-platform">Flutter · Cross-platform</div>
+      </div>
+      <div class="project-name">Merchant Mate</div>
+      <div class="project-desc">Food inventory management app with API-driven stock and order tracking. Improved data synchronization and reduced manual inventory handling through automated workflows and real-time visibility.</div>
+      <div class="project-tech">
+        <span class="tag">Flutter</span>
+        <span class="tag">REST APIs</span>
+        <span class="tag amber">Inventory sync</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-box reveal">
+    <span class="section-label" style="display:block; margin-bottom:12px;">Get in touch</span>
+    <h2>Let's build something together</h2>
+    <p>Open to Flutter/Android roles, contract work, and interesting mobile projects.</p>
+    <div class="contact-details">
+      <a href="mailto:kalpeshchavda.work@gmail.com" class="contact-item">
+        <div class="contact-item-icon">✉</div>
+        kalpeshchavda.work@gmail.com
+      </a>
+      <a href="tel:+917990665641" class="contact-item">
+        <div class="contact-item-icon">📱</div>
+        +91 79906 65641
+      </a>
+      <span class="contact-item">
+        <div class="contact-item-icon">📍</div>
+        Ahmedabad, Gujarat
+      </span>
+    </div>
+    <a href="mailto:kalpeshchavda.work@gmail.com" class="btn-primary" style="font-size:15px; padding: 14px 32px;">Say hello →</a>
+  </div>
+</section>
+
+<footer>
+  Designed &amp; built for Kalpesh Chavda &nbsp;·&nbsp; Flutter &amp; Android Engineer &nbsp;·&nbsp; Ahmedabad
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
